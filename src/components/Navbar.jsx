@@ -1,10 +1,7 @@
 import React from 'react';
-
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full shadow-sm">
-      
-      {/* 1. TOP UTILITY CONTACT BAR (Hidden on small mobile screens) */}
       <div className="bg-slate-900 text-slate-300 text-xs py-2 border-b border-slate-800 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex space-x-6">
@@ -22,31 +19,21 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-
-      {/* 2. MAIN NAVIGATION ROW */}
       <nav className="bg-white/95 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            
-            {/* BRAND LOGO IDENTITY SECTION */}
             <div className="flex items-center gap-3">
-              {/* Your actual custom brand logo graphic */}
             <img src="\Hero\logo.png" alt="SE" 
               className="h-12 w-12 object-cover rounded-full border border-slate-100 shadow-sm"/>
-              {/* Company Text Typography */}
               <span className="text-base sm:text-lg font-bold text-blue-600 tracking-tight uppercase">
                 Sarawagi Enterprises </span>
             </div>
-            
-            {/* MIDDLE NAVIGATION LINKS */}
             <div className="hidden md:flex space-x-8 font-semibold text-sm text-slate-600">
               <a href="#home" className="hover:text-blue-600 transition-colors duration-150">Home</a>
               <a href="#products" className="hover:text-blue-600 transition-colors duration-150">Products</a>
               <a href="#about" className="hover:text-blue-600 transition-colors duration-150">About Us</a>
               <a href="#contact" className="hover:text-blue-600 transition-colors duration-150">Contact</a>
             </div>
-
-            {/* QUICK CALL TO ACTION BUTTON */}
             <div className="flex items-center gap-4">
               <a 
                 href="#contact" 
@@ -55,7 +42,6 @@ export default function Navbar() {
                 Request Quote
               </a>
             </div>
-
           </div>
         </div>
       </nav>

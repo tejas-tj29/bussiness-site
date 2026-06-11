@@ -1,26 +1,16 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './sections/Hero'; // <-- 1. THIS IS YOUR NEW IMPORT LINE
+import { Outlet } from 'react-router'
+import Navbar from './components/Navbar.jsx'
 
-export default function App() {
-  const whatsappNumber = "9431133184";
+export default function Layout() {
+  const whatsappNumber = "919876543210";
   const defaultMessage = encodeURIComponent
   ("Hello Sarawagi Enterprises, I am checking out your industrial equipment catalog. Please share more details.");
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 scroll-smooth antialiased">
-      {/* 1. Global Sticky Header */}
+    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
       <Navbar />
-
-      {/* Main Sections Stack */}
-      <main>
-        {/* 2. WE RENDER YOUR HERO SLIDESHOW RIGHT HERE AT THE TOP */}
-        <Hero /> 
-
-        {/* Future sections like <Products />, <About />, <Contact /> will sit down here */}
+      <main className="flex-grow"> 
+        <Outlet />
       </main>
-      {/* =========================================================================
-          🚀 4. FLOATING WHATSAPP INTERACTIVE BUTTON (Floats on top of all layers)
-          ========================================================================= */}
       <a
         href={`https://wa.me/${whatsappNumber}?text=${defaultMessage}`}
         target="_blank"
@@ -42,6 +32,7 @@ export default function App() {
           Chat on WhatsApp
         </span>
       </a>
+
     </div>
-  );
+  )
 }
