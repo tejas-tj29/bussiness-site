@@ -2,7 +2,7 @@ import { Outlet } from 'react-router'
 import Navbar from './components/Navbar.jsx'
 
 export default function Layout() {
-  const whatsappNumber = "919876543210";
+  const whatsappNumber = "919431133184";
   const defaultMessage = encodeURIComponent
   ("Hello Sarawagi Enterprises, I am checking out your industrial equipment catalog. Please share more details.");
   return (

@@ -7,3 +7,12 @@ export const heroImages = [
   "/Hero/bg4.jpg.jpeg",
   "/Hero/bg5.jpg.jpeg",
 ];
+
+export const logos = [
+  "/CLogo/fouress.png",
+  "/CLogo/amiad.png",
+  "/CLogo/auma.png",
+  "/CLogo/fosroc.png",
+  "/CLogo/jdjones.png",
+  "/CLogo/myk.png"
+]

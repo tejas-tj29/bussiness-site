@@ -13,10 +13,10 @@ export default function Navbar() {
               <span className="text-blue-400 font-medium group-hover:underline">📞 Call Us:</span> 
                +91 9431133184
             </a>
-            <a href="mailto:sarawagienterprises@gmail.com?subject=Industrial%20Equipment%20Inquiry" 
+            <a href="mailto:sarawgi@hotmail.com?subject=Industrial%20Equipment%20Inquiry" 
               className="flex items-center gap-1 hover:text-blue-400 transition-colors duration-150 group">
               <span className="text-blue-400 font-medium group-hover:underline">✉️ Email:</span> 
-              sarawagienterprises@gmail.com 
+              sarawgi@hotmail.com 
             </a>
           </div>
           <div className="flex space-x-4">
