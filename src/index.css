@@ -17,3 +17,29 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 }
+
+/* Custom infinite sliding animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-33.33%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+/* Pause the scrolling animation gracefully whenever a user hovers their mouse */
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Utility to completely hide default browser scrollbars while keeping swipe interaction active */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* 2. This targets Firefox and old IE safely */
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}

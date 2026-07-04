@@ -14,22 +14,23 @@ export const logos = [
   "/CLogo/auma.png",
   "/CLogo/fosroc.png",
   "/CLogo/jdjones.png",
-  "/CLogo/myk.png"
+  "/CLogo/myk.png",
+  "/CLogo/ebro.png",
 ]
 
 export const clientLogos = [
-  "/ClientsLogo/tata steel.jpg",
   "/ClientsLogo/Tata Power.jpg",
   "/ClientsLogo/TataSteel Long.jpeg",
   "/ClientsLogo/Tinplate.jpg",
+  "/ClientsLogo/tata steel.jpg",
   "/ClientsLogo/acc.jpg",
   "/ClientsLogo/adanipower.png",
   "/ClientsLogo/Adhunik.jpg",
   "/ClientsLogo/amalgam.jpg",
   "/ClientsLogo/awipl.jpg",
-  "/ClientsLogo/enamiLogoNormal.png",
+  "/ClientsLogo/emamiLogoNormal.png",
   "/ClientsLogo/Haldia.jpg",
-  "/ClientsLogo/Hiranmaye.jpg",
+  "/ClientsLogo/hiranmaye.jpg",
   "/ClientsLogo/jajpur.jpg",
   "/ClientsLogo/Jsw.jpg",
   "/ClientsLogo/nalco_logo.jpg",
