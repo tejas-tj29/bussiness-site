@@ -16,3 +16,28 @@ export const logos = [
   "/CLogo/jdjones.png",
   "/CLogo/myk.png"
 ]
+
+export const clientLogos = [
+  "/ClientsLogo/tata steel.jpg",
+  "/ClientsLogo/Tata Power.jpg",
+  "/ClientsLogo/TataSteel Long.jpeg",
+  "/ClientsLogo/Tinplate.jpg",
+  "/ClientsLogo/acc.jpg",
+  "/ClientsLogo/adanipower.png",
+  "/ClientsLogo/Adhunik.jpg",
+  "/ClientsLogo/amalgam.jpg",
+  "/ClientsLogo/awipl.jpg",
+  "/ClientsLogo/enamiLogoNormal.png",
+  "/ClientsLogo/Haldia.jpg",
+  "/ClientsLogo/Hiranmaye.jpg",
+  "/ClientsLogo/jajpur.jpg",
+  "/ClientsLogo/Jsw.jpg",
+  "/ClientsLogo/nalco_logo.jpg",
+  "/ClientsLogo/Ninl.jpg",
+  "/ClientsLogo/ramco.jpg",
+  "/ClientsLogo/rkfl.jpg",
+  "/ClientsLogo/rungtamines.jpg",
+  "/ClientsLogo/sail.jpg",
+  "/ClientsLogo/Shreecement.jpg",
+  "/ClientsLogo/tepl.jpg",
+]
