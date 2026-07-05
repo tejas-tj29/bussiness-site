@@ -34,10 +34,10 @@ export default function Navbar() {
           <div className="flex justify-between h-16 items-center">
             
             {/* Logo Brand Segment Links to Home */}
-            <Link to="/" className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3 no-underline outline-none">
               <img src="/Hero/logo.png" alt="SE" 
-                className="h-12 w-12 object-cover rounded-full border border-slate-100 shadow-xs"/>
-              <span className="text-base sm:text-lg font-bold text-blue-600 tracking-tight uppercase">
+                className="h-12 w-auto block object-contain mix-blend-multiply"/>
+              <span className="text-lg sm:text-xl font-bold text-blue-600 tracking-tight uppercase">
                 Sarawagi Enterprises
               </span>
             </Link>
