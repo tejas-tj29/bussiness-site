@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router'; 
+import React, { useState, useRef, useEffect } from "react";
+import { Link } from "react-router";
 
 export default function Navbar() {
   // 📱 Mobile menu side drawer control state
@@ -20,8 +20,8 @@ export default function Navbar() {
         setActiveDropdown(null);
       }
     }
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => document.removeEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
   const closeAllMenus = () => {
@@ -36,15 +36,23 @@ export default function Navbar() {
       <div className="bg-slate-900 text-slate-300 text-xs py-2 border-b border-slate-800 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex space-x-6">
-            <a href="tel:+919431133184" 
-              className="flex items-center gap-1 hover:text-blue-400 transition-colors duration-150 group">
-              <span className="text-blue-400 font-medium group-hover:underline">📞 Call Us:</span> 
-               +91 9431133184
+            <a
+              href="tel:+919431133184"
+              className="flex items-center gap-1 hover:text-blue-400 transition-colors duration-150 group"
+            >
+              <span className="text-blue-400 font-medium group-hover:underline">
+                📞 Call Us:
+              </span>
+              +91 9431133184
             </a>
-            <a href="mailto:sarawgi@hotmail.com?subject=Industrial%20Equipment%20Inquiry" 
-              className="flex items-center gap-1 hover:text-blue-400 transition-colors duration-150 group">
-              <span className="text-blue-400 font-medium group-hover:underline">✉️ Email:</span> 
-               sarawgi@hotmail.com 
+            <a
+              href="mailto:sarawgi@hotmail.com?subject=Industrial%20Equipment%20Inquiry"
+              className="flex items-center gap-1 hover:text-blue-400 transition-colors duration-150 group"
+            >
+              <span className="text-blue-400 font-medium group-hover:underline">
+                ✉️ Email:
+              </span>
+              sarawgi@hotmail.com
             </a>
           </div>
           <div className="flex space-x-4">
@@ -52,47 +60,68 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      
+
       {/* Main Navbar Body */}
       <nav className="bg-white/95 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            
             {/* Logo Brand Segment Links to Home */}
-            <Link to="/" onClick={closeAllMenus} className="flex items-center gap-3 no-underline outline-none">
-              <img src="/Hero/logo.png" alt="SE" 
-                className="h-12 w-auto block object-contain mix-blend-multiply"/>
+            <Link
+              to="/"
+              onClick={closeAllMenus}
+              className="flex items-center gap-3 no-underline outline-none"
+            >
+              <img
+                src="/Hero/logo.png"
+                alt="SE"
+                className="h-12 w-auto block object-contain mix-blend-multiply"
+              />
               <span className="text-lg sm:text-xl font-bold text-blue-600 tracking-tight uppercase">
                 Sarawagi Enterprises
               </span>
             </Link>
-            
+
             {/* 🖥️ DESKTOP NAVIGATION MENU (Hover Activated) */}
             <div className="hidden md:flex space-x-6 font-semibold text-sm text-slate-600 items-center">
-              
               {/* Home */}
-              <Link to="/" onClick={closeAllMenus} className="hover:text-blue-600 transition-colors duration-150">
+              <Link
+                to="/"
+                onClick={closeAllMenus}
+                className="hover:text-blue-600 transition-colors duration-150"
+              >
                 Home
               </Link>
 
               {/* About Us Hover Wrapper Container */}
-              <div 
+              <div
                 className="relative py-4"
-                onMouseEnter={() => setActiveDropdown('about')}
+                onMouseEnter={() => setActiveDropdown("about")}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button 
-                  className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold"
-                >
+                <button className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold">
                   About Us
-                  <svg className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === 'about' ? 'rotate-180 text-blue-600' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "about" ? "rotate-180 text-blue-600" : ""}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
 
-                {activeDropdown === 'about' && (
+                {activeDropdown === "about" && (
                   <div className="absolute left-0 mt-1 w-48 rounded-xl bg-white shadow-xl ring-1 ring-black/5 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                    <Link to="/clients" onClick={closeAllMenus} className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors">
+                    <Link
+                      to="/clients"
+                      onClick={closeAllMenus}
+                      className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
+                    >
                       Clients
                     </Link>
                   </div>
@@ -100,31 +129,51 @@ export default function Navbar() {
               </div>
 
               {/* Products Hover Wrapper Container */}
-              <div 
+              <div
                 className="relative py-4" /* Added padding here so there's no blank gap below the button */
-                onMouseEnter={() => setActiveDropdown('products')}
+                onMouseEnter={() => setActiveDropdown("products")}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button 
-                  className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold"
-                >
+                <button className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold">
                   Products
-                  <svg className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === 'products' ? 'rotate-180 text-blue-600' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "products" ? "rotate-180 text-blue-600" : ""}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
 
                 {/* Submenu Panel */}
-                {activeDropdown === 'products' && (
+                {activeDropdown === "products" && (
                   <div className="absolute left-0 mt-1 w-52 rounded-xl bg-white shadow-xl ring-1 ring-black/5 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                    <Link to="/products" onClick={closeAllMenus} className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors">
+                    <Link
+                      to="/products"
+                      onClick={closeAllMenus}
+                      className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
+                    >
                       All Products Overview
                     </Link>
                     <div className="h-px bg-gray-100 my-1 mx-2"></div>
-                    <Link to="/products#industrial" onClick={closeAllMenus} className="block px-4 py-2 text-xs text-gray-500 hover:bg-slate-50 hover:text-blue-600 rounded-lg mx-1 transition-colors">
+                    <Link
+                      to="/products#industrial"
+                      onClick={closeAllMenus}
+                      className="block px-4 py-2 text-xs text-gray-500 hover:bg-slate-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
+                    >
                       Industrial Equipment
                     </Link>
-                    <Link to="/products#raw-materials" onClick={closeAllMenus} className="block px-4 py-2 text-xs text-gray-500 hover:bg-slate-50 hover:text-blue-600 rounded-lg mx-1 transition-colors">
+                    <Link
+                      to="/products#raw-materials"
+                      onClick={closeAllMenus}
+                      className="block px-4 py-2 text-xs text-gray-500 hover:bg-slate-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
+                    >
                       Raw Materials
                     </Link>
                   </div>
@@ -132,15 +181,19 @@ export default function Navbar() {
               </div>
 
               {/* Contact Link */}
-              <Link to="/contact" onClick={closeAllMenus} className="hover:text-blue-600 transition-colors duration-150">
+              <Link
+                to="/contact"
+                onClick={closeAllMenus}
+                className="hover:text-blue-600 transition-colors duration-150"
+              >
                 Contact
               </Link>
             </div>
-            
+
             {/* Action Segment Box */}
             <div className="flex items-center gap-2 sm:gap-4">
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 onClick={closeAllMenus}
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition font-semibold text-xs sm:text-sm shadow-md shadow-blue-600/10"
               >
@@ -148,24 +201,43 @@ export default function Navbar() {
               </Link>
 
               {/* 📱 MOBILE HAMBURGER BUTTON */}
-              <button 
+              <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 type="button"
                 className="md:hidden text-slate-600 hover:text-slate-900 focus:outline-none p-2 rounded-lg hover:bg-slate-100/80 transition-colors"
                 aria-label="Toggle Menu"
               >
                 {isMenuOpen ? (
-                  <svg className="h-5 sm:h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="h-5 sm:h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 ) : (
-                  <svg className="h-5 sm:h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  <svg
+                    className="h-5 sm:h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
                   </svg>
                 )}
               </button>
             </div>
-
           </div>
         </div>
 
@@ -173,48 +245,105 @@ export default function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 shadow-sm transition-all duration-200">
             <div className="px-4 pt-2 pb-4 space-y-1 font-semibold text-sm text-slate-600">
-              <Link to="/" onClick={closeAllMenus} className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors">
+              <Link
+                to="/"
+                onClick={closeAllMenus}
+                className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors"
+              >
                 Home
               </Link>
 
               <div>
-                <button 
-                  onClick={() => setMobileSubmenu(mobileSubmenu === 'products' ? null : 'products')}
+                <button
+                  onClick={() =>
+                    setMobileSubmenu(
+                      mobileSubmenu === "products" ? null : "products",
+                    )
+                  }
                   className="w-full flex justify-between items-center py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors text-left font-semibold"
                 >
                   <span>Products</span>
-                  <svg className={`w-4 h-4 transition-transform ${mobileSubmenu === 'products' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  <svg
+                    className={`w-4 h-4 transition-transform ${mobileSubmenu === "products" ? "rotate-180" : ""}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
-                {mobileSubmenu === 'products' && (
+                {mobileSubmenu === "products" && (
                   <div className="pl-6 bg-slate-50/50 rounded-lg mt-1 space-y-1 py-1">
-                    <Link to="/products" onClick={closeAllMenus} className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600">All Products</Link>
-                    <Link to="/products#industrial" onClick={closeAllMenus} className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600">Industrial Equipment</Link>
-                    <Link to="/products#raw-materials" onClick={closeAllMenus} className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600">Raw Materials</Link>
+                    <Link
+                      to="/products"
+                      onClick={closeAllMenus}
+                      className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600"
+                    >
+                      All Products
+                    </Link>
+                    <Link
+                      to="/products#industrial"
+                      onClick={closeAllMenus}
+                      className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600"
+                    >
+                      Industrial Equipment
+                    </Link>
+                    <Link
+                      to="/products#raw-materials"
+                      onClick={closeAllMenus}
+                      className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600"
+                    >
+                      Raw Materials
+                    </Link>
                   </div>
                 )}
               </div>
 
               <div>
-                <button 
-                  onClick={() => setMobileSubmenu(mobileSubmenu === 'about' ? null : 'about')}
+                <button
+                  onClick={() =>
+                    setMobileSubmenu(mobileSubmenu === "about" ? null : "about")
+                  }
                   className="w-full flex justify-between items-center py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors text-left font-semibold"
                 >
                   <span>About Us</span>
-                  <svg className={`w-4 h-4 transition-transform ${mobileSubmenu === 'about' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  <svg
+                    className={`w-4 h-4 transition-transform ${mobileSubmenu === "about" ? "rotate-180" : ""}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
-                {mobileSubmenu === 'about' && (
+                {mobileSubmenu === "about" && (
                   <div className="pl-6 bg-slate-50/50 rounded-lg mt-1 space-y-1 py-1">
-                    <Link to="/about" onClick={closeAllMenus} className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600">Our Profile</Link>
-                    <Link to="/about#team" onClick={closeAllMenus} className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600">Our Team</Link>
+                    <Link
+                      to="/clients"
+                      onClick={closeAllMenus}
+                      className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600"
+                    >
+                      Clients
+                    </Link>
                   </div>
                 )}
               </div>
 
-              <Link to="/contact" onClick={closeAllMenus} className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors">
+              <Link
+                to="/contact"
+                onClick={closeAllMenus}
+                className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors"
+              >
                 Contact
               </Link>
             </div>
