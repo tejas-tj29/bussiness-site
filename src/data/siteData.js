@@ -41,6 +41,9 @@ export const clientLogos = [
   "/ClientsLogo/sail.jpg",
   "/ClientsLogo/Shreecement.jpg",
   "/ClientsLogo/tepl.jpg",
+  "./ClientsLogo/Linde.png",
+  "./ClientsLogo/nilachal.jpg",
+  "./ClientsLogo/shah.png"
 ]
 
 export const industryImages = [

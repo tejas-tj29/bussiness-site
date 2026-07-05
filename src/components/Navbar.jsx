@@ -1,12 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router'; 
 
 export default function Navbar() {
-  // 🟢 1. Create state to manage mobile menu open/closed state
+  // 📱 Mobile menu side drawer control state
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // 🖥️ Desktop menu hover active states ('products', 'about', or null)
+  const [activeDropdown, setActiveDropdown] = useState(null);
+
+  // 📱 Mobile sub-menu toggle trackers
+  const [mobileSubmenu, setMobileSubmenu] = useState(null);
+
+  const navRef = useRef(null);
+
+  // Automatically close everything if user leaves browser focus or clicks elsewhere
+  useEffect(() => {
+    function handleOutsideClick(event) {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setActiveDropdown(null);
+      }
+    }
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
+  const closeAllMenus = () => {
+    setIsMenuOpen(false);
+    setActiveDropdown(null);
+    setMobileSubmenu(null);
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full shadow-xs">
+    <header className="sticky top-0 z-50 w-full shadow-xs" ref={navRef}>
       {/* Top Banner (Hidden on Mobile, Visible on Desktop) */}
       <div className="bg-slate-900 text-slate-300 text-xs py-2 border-b border-slate-800 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -34,7 +59,7 @@ export default function Navbar() {
           <div className="flex justify-between h-16 items-center">
             
             {/* Logo Brand Segment Links to Home */}
-            <Link to="/" className="flex items-center gap-3 no-underline outline-none">
+            <Link to="/" onClick={closeAllMenus} className="flex items-center gap-3 no-underline outline-none">
               <img src="/Hero/logo.png" alt="SE" 
                 className="h-12 w-auto block object-contain mix-blend-multiply"/>
               <span className="text-lg sm:text-xl font-bold text-blue-600 tracking-tight uppercase">
@@ -42,33 +67,93 @@ export default function Navbar() {
               </span>
             </Link>
             
-            {/* Desktop Navigation Menu (hidden md:flex remains unchanged) */}
-            <div className="hidden md:flex space-x-8 font-semibold text-sm text-slate-600">
-              <Link to="/" className="hover:text-blue-600 transition-colors duration-150">Home</Link>
-              <Link to="/products" className="hover:text-blue-600 transition-colors duration-150">Products</Link>
-              <Link to="/about" className="hover:text-blue-600 transition-colors duration-150">About Us</Link>
-              <Link to="/contact" className="hover:text-blue-600 transition-colors duration-150">Contact</Link>
+            {/* 🖥️ DESKTOP NAVIGATION MENU (Hover Activated) */}
+            <div className="hidden md:flex space-x-6 font-semibold text-sm text-slate-600 items-center">
+              
+              {/* Home */}
+              <Link to="/" onClick={closeAllMenus} className="hover:text-blue-600 transition-colors duration-150">
+                Home
+              </Link>
+
+              {/* About Us Hover Wrapper Container */}
+              <div 
+                className="relative py-4"
+                onMouseEnter={() => setActiveDropdown('about')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button 
+                  className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold"
+                >
+                  About Us
+                  <svg className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === 'about' ? 'rotate-180 text-blue-600' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {activeDropdown === 'about' && (
+                  <div className="absolute left-0 mt-1 w-48 rounded-xl bg-white shadow-xl ring-1 ring-black/5 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                    <Link to="/clients" onClick={closeAllMenus} className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors">
+                      Clients
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Products Hover Wrapper Container */}
+              <div 
+                className="relative py-4" /* Added padding here so there's no blank gap below the button */
+                onMouseEnter={() => setActiveDropdown('products')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button 
+                  className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold"
+                >
+                  Products
+                  <svg className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === 'products' ? 'rotate-180 text-blue-600' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {/* Submenu Panel */}
+                {activeDropdown === 'products' && (
+                  <div className="absolute left-0 mt-1 w-52 rounded-xl bg-white shadow-xl ring-1 ring-black/5 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                    <Link to="/products" onClick={closeAllMenus} className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors">
+                      All Products Overview
+                    </Link>
+                    <div className="h-px bg-gray-100 my-1 mx-2"></div>
+                    <Link to="/products#industrial" onClick={closeAllMenus} className="block px-4 py-2 text-xs text-gray-500 hover:bg-slate-50 hover:text-blue-600 rounded-lg mx-1 transition-colors">
+                      Industrial Equipment
+                    </Link>
+                    <Link to="/products#raw-materials" onClick={closeAllMenus} className="block px-4 py-2 text-xs text-gray-500 hover:bg-slate-50 hover:text-blue-600 rounded-lg mx-1 transition-colors">
+                      Raw Materials
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Contact Link */}
+              <Link to="/contact" onClick={closeAllMenus} className="hover:text-blue-600 transition-colors duration-150">
+                Contact
+              </Link>
             </div>
             
             {/* Action Segment Box */}
             <div className="flex items-center gap-2 sm:gap-4">
-              
-              {/* Request Quote Action Link */}
               <Link 
                 to="/contact" 
+                onClick={closeAllMenus}
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition font-semibold text-xs sm:text-sm shadow-md shadow-blue-600/10"
               >
                 Request Quote
               </Link>
 
-              {/* 📱 MOBILE HAMBURGER BUTTON (Visible on small screens, hidden on md+) */}
+              {/* 📱 MOBILE HAMBURGER BUTTON */}
               <button 
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 type="button"
                 className="md:hidden text-slate-600 hover:text-slate-900 focus:outline-none p-2 rounded-lg hover:bg-slate-100/80 transition-colors"
                 aria-label="Toggle Menu"
               >
-                {/* Dynamically swaps icon depending on boolean toggle state */}
                 {isMenuOpen ? (
                   <svg className="h-5 sm:h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -79,42 +164,57 @@ export default function Navbar() {
                   </svg>
                 )}
               </button>
-
             </div>
 
           </div>
         </div>
 
-        {/* 📱 MOBILE DROPDOWN LAYOUT DRAWER */}
+        {/* 📱 MOBILE DROPDOWN LAYOUT DRAWER (Stays click-triggered) */}
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 shadow-sm transition-all duration-200">
             <div className="px-4 pt-2 pb-4 space-y-1 font-semibold text-sm text-slate-600">
-              <Link 
-                to="/" 
-                onClick={() => setIsMenuOpen(false)} // Auto-closes popup selection
-                className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors"
-              >
+              <Link to="/" onClick={closeAllMenus} className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors">
                 Home
               </Link>
-              <Link 
-                to="/products" 
-                onClick={() => setIsMenuOpen(false)}
-                className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors"
-              >
-                Products
-              </Link>
-              <Link 
-                to="/about" 
-                onClick={() => setIsMenuOpen(false)}
-                className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors"
-              >
-                About Us
-              </Link>
-              <Link 
-                to="/contact" 
-                onClick={() => setIsMenuOpen(false)}
-                className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors"
-              >
+
+              <div>
+                <button 
+                  onClick={() => setMobileSubmenu(mobileSubmenu === 'products' ? null : 'products')}
+                  className="w-full flex justify-between items-center py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors text-left font-semibold"
+                >
+                  <span>Products</span>
+                  <svg className={`w-4 h-4 transition-transform ${mobileSubmenu === 'products' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {mobileSubmenu === 'products' && (
+                  <div className="pl-6 bg-slate-50/50 rounded-lg mt-1 space-y-1 py-1">
+                    <Link to="/products" onClick={closeAllMenus} className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600">All Products</Link>
+                    <Link to="/products#industrial" onClick={closeAllMenus} className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600">Industrial Equipment</Link>
+                    <Link to="/products#raw-materials" onClick={closeAllMenus} className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600">Raw Materials</Link>
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <button 
+                  onClick={() => setMobileSubmenu(mobileSubmenu === 'about' ? null : 'about')}
+                  className="w-full flex justify-between items-center py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors text-left font-semibold"
+                >
+                  <span>About Us</span>
+                  <svg className={`w-4 h-4 transition-transform ${mobileSubmenu === 'about' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {mobileSubmenu === 'about' && (
+                  <div className="pl-6 bg-slate-50/50 rounded-lg mt-1 space-y-1 py-1">
+                    <Link to="/about" onClick={closeAllMenus} className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600">Our Profile</Link>
+                    <Link to="/about#team" onClick={closeAllMenus} className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600">Our Team</Link>
+                  </div>
+                )}
+              </div>
+
+              <Link to="/contact" onClick={closeAllMenus} className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors">
                 Contact
               </Link>
             </div>

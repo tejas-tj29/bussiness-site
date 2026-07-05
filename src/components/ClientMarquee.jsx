@@ -117,10 +117,12 @@ export default function ClientMarquee() {
 
               // 🟢 FIX 1: Turn the boolean rule into an index-number check list!
               // For example, if your 4th logo (index 3) and 6th logo (index 5) look tiny, add them here:
+              const isVerySmallLogo = originalIndex === 24;
               const isSmallLogo =  originalIndex === 0 || originalIndex === 1|| originalIndex === 4|| originalIndex === 5||
               originalIndex === 6|| originalIndex === 7||  originalIndex === 10|| originalIndex === 11|| originalIndex === 21
-              ||  originalIndex === 20;
+              ||  originalIndex === 20||originalIndex === 23;
               const isNormalLogo = originalIndex === 16|| originalIndex === 8|| originalIndex === 9||originalIndex === 19;
+             
 
               return (
                 <div
@@ -134,7 +136,7 @@ export default function ClientMarquee() {
                     // 🟢 FIX 3: Strict h-full containment forces browsers to prioritize natural scaling inside the box container bounds
                     className={`h-full max-w-full object-contain block pointer-events-none transition-transform ${
                       isSmallLogo ? "scale-155" : ""
-                    } ${isNormalLogo ? "scale-120" : ""} ${client.extraStyles}`}
+                    } ${isNormalLogo ? "scale-120" : ""} ${isVerySmallLogo ? "scale-200" : ""} ${client.extraStyles}`}
                     loading="lazy"
                   />
                 </div>
