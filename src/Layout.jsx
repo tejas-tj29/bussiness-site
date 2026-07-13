@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router'
 import Navbar from './components/Navbar.jsx'
+import Footer from './components/Footer.jsx'
 
 export default function Layout() {
   const whatsappNumber = "919431133184";
@@ -32,7 +33,7 @@ export default function Layout() {
           Chat on WhatsApp
         </span>
       </a>
-
+      <Footer />
     </div>
   )
 }

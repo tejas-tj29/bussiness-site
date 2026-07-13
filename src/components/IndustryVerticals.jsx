@@ -76,12 +76,6 @@ export default function IndustryVerticals() {
                 <h3 className="text-base font-bold text-slate-800 tracking-tight group-hover:text-blue-600 transition-colors">
                   {item.title}
                 </h3>
-
-                {/* Card Footer Interaction Link */}
-                <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-blue-600 font-semibold text-xs cursor-pointer">
-                  <span>Explore Sector Profile</span>
-                  <span className="text-sm transition-transform group-hover:translate-x-1">→</span>
-                </div>
               </div>
 
             </div>
