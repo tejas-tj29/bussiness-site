@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import inquiryRouter from './routes/inquiry.routes.js';
+import productRouter from './routes/product.routes.js';
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Sarawagi Enterprises API!');
 });
 
-
+app.use('/api/v1/products', productRouter);
 app.use('/api/v1/inquiries', inquiryRouter);
 
 export default app;
