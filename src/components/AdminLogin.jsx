@@ -30,6 +30,7 @@ const AdminLogin = () => {
 
       if (response.ok && data.success) {
         // 🎉 Login Success! Seedha Admin Dashboard par bhej do
+        localStorage.setItem("isAdminLoggedIn", "true");
         navigate("/admin/manage-products");
       } else {
         // ❌ Login Failed (Wrong password/email)
