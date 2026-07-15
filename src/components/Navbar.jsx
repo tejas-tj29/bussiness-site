@@ -117,6 +117,16 @@ export default function Navbar() {
 
                 {activeDropdown === "about" && (
                   <div className="absolute left-0 mt-1 w-48 rounded-xl bg-white shadow-xl ring-1 ring-black/5 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                    {/* Link 1: Profile */}
+                    <Link
+                      to="/profile"
+                      onClick={closeAllMenus}
+                      className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
+                    >
+                      Profile
+                    </Link>
+
+                    {/* Link 2: Clients (Profile ke theek neeche aayega) */}
                     <Link
                       to="/clients"
                       onClick={closeAllMenus}

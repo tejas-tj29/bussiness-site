@@ -1,22 +1,30 @@
 import Hero from "../sections/Hero";
+import { Helmet } from "react-helmet-async";
 import ProductIntro from "../components/ProductIntro";
 import ClientMarquee from "../components/ClientMarquee";
 import IndustryVerticals from "../components/IndustryVerticals";
 
-import { useEffect } from 'react';
-
 export default function Home() {
-
-     useEffect(() => {
-    document.title = "Home | Sarawagi Enterprises";
-     }, []);
-
-    return(
-        <>
-            <Hero />
-            <ProductIntro />
-            <IndustryVerticals />
-            <ClientMarquee /> 
-        </>
-    )
+  return (
+    <>
+      <Helmet>
+        <title>
+          Sarawagi Enterprises | Top Industrial Distributor in Jamshedpur
+        </title>
+        <meta
+          name="description"
+          content="Authorized distributors for top principle companies. Supplying premium industrial materials."
+        />
+        {/* Keywords help search engines understand the exact terms */}
+        <meta
+          name="keywords"
+          content="Industrial suppliers, chemicals, [Principle Company Name] distributor, wholesale materials"
+        />
+      </Helmet>
+      <Hero />
+      <ProductIntro />
+      <IndustryVerticals />
+      <ClientMarquee />
+    </>
+  );
 }
