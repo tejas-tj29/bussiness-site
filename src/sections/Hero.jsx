@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { heroImages } from '../data/siteData';
+import { Link } from 'react-router';
 
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,12 +45,12 @@ export default function Hero() {
             Welcome to <span className="text-white font-semibold">Sarawagi Enterprises</span>. We supply industrial goods and dependable business infrastructure solutions.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="#products"
+            <Link
+              to="/products"
               className="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-lg shadow-blue-600/20 transition-all duration-200"
             >
               Explore Products
-            </a>
+            </Link>
           </div>
         </div>
       </div>
