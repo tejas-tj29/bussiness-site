@@ -53,15 +53,15 @@ const AdminManageProducts = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Manage Inventory</h2>
+    <div className="w-full bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+      <div className="flex justify-between items-center mb-8 border-b pb-4">
+        <h2 className="text-3xl font-bold text-gray-800">Manage Inventory</h2>
         
         {/* Category Filter Dropdown for Admin */}
         <select 
           value={activeCategory}
           onChange={(e) => setActiveCategory(e.target.value)}
-          className="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-medium"
+          className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-semibold bg-gray-50 text-gray-700 outline-none cursor-pointer"
         >
           {principleCompanies.map(company => (
             <option key={company} value={company}>{company}</option>
@@ -70,34 +70,43 @@ const AdminManageProducts = () => {
       </div>
 
       {loading ? (
-        <p className="text-gray-500">Loading products...</p>
+        <div className="flex justify-center py-10">
+           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+        </div>
       ) : products.length === 0 ? (
-        <p className="text-gray-500 italic p-4 bg-gray-50 rounded">No products found in this category.</p>
+        <p className="text-gray-500 text-lg italic p-8 bg-gray-50 rounded-lg text-center border border-dashed border-gray-300">
+          No products found in this category.
+        </p>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-gray-700">
-                <th className="p-3 border-b border-gray-200 rounded-tl-lg">Image</th>
-                <th className="p-3 border-b border-gray-200">Product Title</th>
-                <th className="p-3 border-b border-gray-200 rounded-tr-lg text-right">Action</th>
+        <div className="overflow-x-auto rounded-lg border border-gray-200">
+          <table className="w-full text-left bg-white">
+            <thead className="bg-gray-100 border-b border-gray-200">
+              <tr>
+                {/* Fixed widths to balance the layout perfectly */}
+                <th className="py-4 px-6 font-semibold text-gray-700 w-32">Image</th>
+                <th className="py-4 px-6 font-semibold text-gray-700 w-auto">Product Title</th>
+                <th className="py-4 px-6 font-semibold text-gray-700 w-40 text-right">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-gray-100">
               {products.map((item) => (
-                <tr key={item._id} className="hover:bg-gray-50 transition-colors border-b border-gray-100">
-                  <td className="p-3 w-20">
-                    <img 
-                      src={item.image} 
-                      alt={item.title} 
-                      className="w-12 h-12 object-contain mix-blend-multiply bg-white rounded border"
-                    />
+                <tr key={item._id} className="hover:bg-blue-50/50 transition-colors duration-200">
+                  <td className="py-4 px-6">
+                    <div className="w-16 h-16 bg-white border border-gray-200 rounded-lg overflow-hidden flex items-center justify-center p-1 shadow-sm">
+                      <img 
+                        src={item.image || "https://placehold.co/100x100?text=No+Image"} 
+                        alt={item.title} 
+                        className="max-h-full max-w-full object-contain mix-blend-multiply"
+                      />
+                    </div>
                   </td>
-                  <td className="p-3 font-semibold text-gray-800">{item.title}</td>
-                  <td className="p-3 text-right">
+                  <td className="py-4 px-6">
+                    <span className="text-lg font-medium text-gray-800">{item.title}</span>
+                  </td>
+                  <td className="py-4 px-6 text-right">
                     <button 
                       onClick={() => handleDelete(item._id, item.title)}
-                      className="px-4 py-2 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white border border-red-200 hover:border-red-600 rounded-lg font-medium transition-colors"
+                      className="px-5 py-2.5 bg-white text-red-600 hover:bg-red-600 hover:text-white border border-red-200 rounded-lg font-semibold transition-all duration-200 shadow-sm hover:shadow active:scale-95"
                     >
                       Delete
                     </button>
