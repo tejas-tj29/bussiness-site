@@ -34,7 +34,7 @@ const AdminAddProduct = () => {
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/v1/products/add",
+        `${import.meta.env.VITE_API_URL}/products/add`,
         {
           method: "POST",
           // ⚠️ CRITICAL NOTE: NEVER manually set "Content-Type" to "multipart/form-data" with fetch().

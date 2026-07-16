@@ -11,7 +11,7 @@ const AdminManageProducts = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/products/all?companyName=${encodeURIComponent(company)}`,
+        `${import.meta.env.VITE_API_URL}/products/all?companyName=${encodeURIComponent(company)}`,
       );
       const json = await response.json();
       if (json.success) {
@@ -37,7 +37,7 @@ const AdminManageProducts = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/products/remove/${productId}`,
+        `${import.meta.env.VITE_API_URL}/products/remove/${productId}`,
         {
           method: "DELETE",
           credentials: "include", // Include cookies for session management

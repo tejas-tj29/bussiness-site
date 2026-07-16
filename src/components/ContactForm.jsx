@@ -31,7 +31,7 @@ export default function ContactForm() {
         setStatusMessage({ text: '', isError: false });
 
         try {
-            const response = await fetch('http://localhost:5000/api/v1/inquiries', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/inquiries`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
