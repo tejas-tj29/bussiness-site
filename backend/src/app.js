@@ -9,7 +9,7 @@ import productRouter from './routes/product.routes.js';
 const app = express();
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.CORS_ORIGIN,
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
     credentials: true,
 }
