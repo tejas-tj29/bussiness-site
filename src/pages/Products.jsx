@@ -1,110 +1,143 @@
-// src/pages/Products.jsx
-import React, { useState,useEffect } from "react";
-import { principleCompanies, productsData } from "../data/productsData.js";
+import React, { useState, useEffect } from "react";
+import { principleCompanies } from "../data/productsData";
+import { Helmet } from "react-helmet-async";
 
-export default function Products() {
+const Products = () => {
+  // 🎛️ State Pools for Products List, Loading states, and Active Filters
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("MYK Laticrete");
 
-   useEffect(() => {
-    document.title = "Products | Sarawagi Enterprises";
-  }, []);
+  const companiesList = principleCompanies;
 
-  const [activeCompany, setActiveCompany] = useState("MYK Laticrete");
+  const fetchInventoryData = async (company) => {
+    setLoading(true);
+    setError(null);
+    try {
+      // 🔗 Matching the exact modular v1 query paths of our server layout
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/products/all?companyName=${encodeURIComponent(company)}`,
+      );
 
-  const currentCompanyData = productsData[activeCompany] || {};
-  const currentProductsList = currentCompanyData.products || [];
+      const jsonPayload = await response.json();
+
+      if (jsonPayload.success) {
+        setProducts(jsonPayload.data); // Safely array binding into our UI hook
+      } else {
+        throw new Error(
+          jsonPayload.message || "Failed to parse content parameters.",
+        );
+      }
+    } catch (err) {
+      console.error("🔌 [FRONTEND FETCH ERROR]: Wire handshake failed:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ⏱️ Auto-trigger network request loop whenever user changes category toggles
+  useEffect(() => {
+    fetchInventoryData(activeCategory);
+  }, [activeCategory]);
 
   return (
-    <section className="py-12 md:py-16 bg-slate-50 min-h-screen select-none font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Page Main Title Header */}
-        <div className="mb-10 pb-5 border-b border-slate-200">
-          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Our Principal Companies & Products
-          </h1>
-          <p className="text-xs text-slate-500 mt-1 font-medium">
-            Browse through corporate inventories managed by our authorized brand partnerships.
-          </p>
-        </div>
+    <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+      <Helmet>
+        <title>Industrial Chemicals & Polymers | Sarawagi Enterprises</title>
+        <meta
+          name="description"
+          content="Browse our wide range of premium industrial chemicals, masterbatches, and polymers. We are the authorized wholesale suppliers in Jamshedpur."
+        />
+        <meta
+          name="keywords"
+          content="Industrial chemicals, polymers, masterbatches, wholesale supplier, Sarawagi Enterprises products, Jamshedpur"
+        />
+      </Helmet>
 
-        {/* B2B Split Layout Panel Matrix */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-          
-          {/* 🗂️ LEFT COLUMN SIDEBAR: Principal Selector Navigation List */}
-          <div className="bg-white p-4 rounded-xl border border-slate-200/60 shadow-xs lg:sticky lg:top-24 space-y-1.5">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2.5 mb-2 block">
-              Partner Categories
-            </span>
-            {principleCompanies.map((company) => {
-              const isActive = activeCompany === company;
-              return (
-                <button
-                  key={company}
-                  onClick={() => setActiveCompany(company)}
-                  className={`w-full text-left px-3.5 py-3 rounded-lg font-bold text-xs uppercase tracking-wide transition-all duration-150 cursor-pointer ${
-                    isActive
-                      ? "bg-blue-600 text-white shadow-xs"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                  }`}
-                >
-                  {company}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* 📄 RIGHT PANEL: Active Brand Inventory Context */}
-          <div className="lg:col-span-3 space-y-6">
-            
-            {/* Active Company Status Box */}
-            <div className="bg-white rounded-xl border border-slate-200/60 p-5 shadow-xs">
-              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider bg-blue-50 px-2.5 py-1 rounded-md">
-                Active Brand Profile
-              </span>
-              <h2 className="text-lg font-bold text-slate-800 tracking-tight mt-2">
-                {activeCompany}
-              </h2>
-            </div>
-
-            {/* 🎯 THE DYNAMIC CONDITIONAL PRODUCTS GRID */}
-            {currentProductsList.length > 0 ? (
-              // 🟢 Applied bg-white and border radius to the whole grid container, making single individual frames vanish completely!
-              <div className="bg-white rounded-2xl border border-slate-200/60 p-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 items-center justify-items-center shadow-xs">
-                {currentProductsList.map((product, index) => (
-                  <div
-                    key={product.id ? `${product.id}-${index}` : index}
-                    className="w-full flex items-center justify-center transition-transform duration-200 hover:scale-105"
-                  >
-                    {product.image ? (
-                      <img
-                        src={product.image}
-                        alt={`${activeCompany} item`}
-                        // 🟢 Native bounding system allows maximum scaling with full layout transparency
-                        className="w-full h-auto max-h-52 object-contain block"
-                        loading="eager"
-                        onError={(e) => {
-                          e.target.style.display = "none";
-                        }}
-                      />
-                    ) : (
-                      /* Fallback text frame displayed only when string path is empty "" */
-                      <div className="text-[10px] text-slate-400 font-medium tracking-wide bg-slate-50 px-4 py-8 rounded-xl border border-dashed border-slate-200 text-center w-full">
-                        Image Rendering Pending
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              /* 📁 Fallback template layout for empty object lists (Fouress, Amiad, etc.) */
-              <div className="bg-white rounded-xl border border-slate-200/60 p-12 text-center text-slate-400 font-medium text-xs">
-                💼 Catalog cataloging underway for {activeCompany}. Complete product inventory files updates coming soon.
-              </div>
-            )}
-          </div>
-
-        </div>
+      {/* 📁 Left Sidebar Brand Nav Navigation Panel */}
+      <div className="w-full md:w-1/4 flex flex-col gap-2">
+        <h3 className="text-xl font-bold mb-4 text-gray-800">Our Principals</h3>
+        {companiesList.map((company) => (
+          <button
+            key={company}
+            onClick={() => setActiveCategory(company)}
+            className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all ${
+              activeCategory === company
+                ? "bg-blue-600 text-white shadow-md"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            }`}
+          >
+            {company}
+          </button>
+        ))}
       </div>
-    </section>
+
+      {/* 🖼️ Right Side Products Display Layout Canvas */}
+      <div className="w-full md:w-3/4">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">
+          {activeCategory} - Product Range
+        </h2>
+
+        {/* 🩺 Diagnostics Loading Handler Frames */}
+        {loading && (
+          <div className="flex justify-center items-center h-48">
+            <div className="animate-spin rounded-full h-10 w-48 border-b-2 border-blue-600"></div>
+            <p className="ml-3 text-gray-500 font-medium">
+              Querying Database Cluster...
+            </p>
+          </div>
+        )}
+
+        {/* ❌ Error State UI Feedback Banner */}
+        {error && (
+          <div className="bg-red-50 text-red-700 p-4 rounded-xl border border-red-200">
+            ⚠ Connection Lag Error: {error}. Check if backend local port
+            listener is active!
+          </div>
+        )}
+
+        {/* 🧱 Grid Layout Loop Generation */}
+        {!loading &&
+          !error &&
+          (products.length === 0 ? (
+            <p className="text-gray-500 italic py-12 text-center">
+              No products found in database for this brand branch yet. Use Admin
+              Form/Thunder client to inject data!
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.map((item) => (
+                <div
+                  key={item._id}
+                  className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col"
+                >
+                  {/* 🟢 THE BOX-LESS FLOATING IMAGE CONTAINER */}
+                  <div className="h-56 w-full p-4 flex items-center justify-center bg-white">
+                    <img
+                      src={
+                        item.image ||
+                        "https://placehold.co/600x400?text=No+Image"
+                      }
+                      alt={item.title}
+                      className="max-h-full max-w-full object-contain mix-blend-multiply transition-transform duration-500 hover:scale-110"
+                    />
+                  </div>
+
+                  {/* 📝 THE PRODUCT TEXT (Title & Specs) */}
+                  <div className="p-4 border-t border-gray-100 mt-auto bg-gray-50">
+                    <h4 className="font-bold text-lg text-gray-800 mb-2 truncate">
+                      {item.title}
+                    </h4>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+      </div>
+    </div>
   );
-}
+};
+
+export default Products;
