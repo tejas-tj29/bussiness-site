@@ -280,6 +280,48 @@ export default function Navbar() {
               >
                 Home
               </Link>
+              <div>
+                <button
+                  onClick={() =>
+                    setMobileSubmenu(mobileSubmenu === "about" ? null : "about")
+                  }
+                  className="w-full flex justify-between items-center py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors text-left font-semibold"
+                >
+                  <span>About Us</span>
+                  <svg
+                    className={`w-4 h-4 transition-transform ${mobileSubmenu === "about" ? "rotate-180" : ""}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                {mobileSubmenu === "about" && (
+                  <div className="pl-6 bg-slate-50/50 rounded-lg mt-1 space-y-1 py-1">
+                    {/* Link 1: Profile */}
+                    <Link
+                      to="/profile"
+                      onClick={closeAllMenus}
+                      className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
+                    >
+                      Profile
+                    </Link>
+                    <Link
+                      to="/clients"
+                      onClick={closeAllMenus}
+                      className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
+                    >
+                      Clients
+                    </Link>
+                  </div>
+                )}
+              </div>
 
               <div>
                 <button
@@ -327,49 +369,6 @@ export default function Navbar() {
                       className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600"
                     >
                       Raw Materials
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              <div>
-                <button
-                  onClick={() =>
-                    setMobileSubmenu(mobileSubmenu === "about" ? null : "about")
-                  }
-                  className="w-full flex justify-between items-center py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors text-left font-semibold"
-                >
-                  <span>About Us</span>
-                  <svg
-                    className={`w-4 h-4 transition-transform ${mobileSubmenu === "about" ? "rotate-180" : ""}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-                {mobileSubmenu === "about" && (
-                  <div className="pl-6 bg-slate-50/50 rounded-lg mt-1 space-y-1 py-1">
-                    {/* Link 1: Profile */}
-                    <Link
-                      to="/profile"
-                      onClick={closeAllMenus}
-                      className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
-                    >
-                      Profile
-                    </Link>
-                    <Link
-                      to="/clients"
-                      onClick={closeAllMenus}
-                      className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600"
-                    >
-                      Clients
                     </Link>
                   </div>
                 )}
