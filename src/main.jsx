@@ -18,10 +18,13 @@ import AdminManageProducts from './components/AdminManageProduct.jsx'
 import AdminLogin from './components/AdminLogin.jsx'
 import GetEnquiries from './components/GetEnquiries.jsx'
 
+import ScrollToTop from './components/ScrollToTop.jsx'
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HelmetProvider>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
