@@ -166,6 +166,7 @@ const Products = () => {
                               <img
                                 src={getOptimizedUrl(item.image)}
                                 alt="Product"
+                                loading="lazy"
                                 className="max-h-full max-w-full object-contain mix-blend-multiply"
                               />
                             </div>
