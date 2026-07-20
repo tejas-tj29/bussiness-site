@@ -18,7 +18,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [activeCategory, setActiveCategory] = useState("MYK Laticrete");
+  const [activeCategory, setActiveCategory] = useState("Fouress Engineering");
   const [cache, setCache] = useState({});
 
   const companiesList = principleCompanies;

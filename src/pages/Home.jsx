@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import ProductIntro from "../components/ProductIntro";
 import ClientMarquee from "../components/ClientMarquee";
 import IndustryVerticals from "../components/IndustryVerticals";
+import ChairmanMessage from "../components/ChairmanMessage";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       </Helmet>
       <Hero />
       <ProductIntro />
+      <ChairmanMessage />
       <IndustryVerticals />
       <ClientMarquee />
     </>
