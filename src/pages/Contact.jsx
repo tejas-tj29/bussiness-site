@@ -6,7 +6,7 @@ export default function Contact() {
   return (
     <div className="w-full bg-slate-950 py-16 px-4 min-h-[calc(100vh-4rem)]">
       <Helmet>
-        <title>Contact Sarawagi Enterprises | Get a Free Quote Today</title>
+        <title>Contact Sarawagi Enterprises | Get a Quote Today</title>
         <meta
           name="description"
           content="Contact Sarawagi Enterprises for bulk industrial material orders. Reach out to our Jamshedpur office for inquiries, quotes, and distributorship details."
