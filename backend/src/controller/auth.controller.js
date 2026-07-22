@@ -87,7 +87,7 @@ export const loginAdmin = async (req, res) => {
       "-password -refreshToken",
     );
 
-    const options = { httpOnly: true , secure: process.env.NODE_ENV === 'production' && false , sameSite: 'lax' };
+    const options = { httpOnly: true , secure: process.env.NODE_ENV === 'production' && false };
 
     return res
     .status(200)
