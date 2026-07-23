@@ -14,12 +14,9 @@ export default function Home() {
         </title>
         <meta
           name="description"
-          content="Authorized distributors for top principle companies. Supplying premium industrial materials."
-        />
-        {/* Keywords help search engines understand the exact terms */}
-        <meta
-          name="keywords"
-          content="Industrial suppliers, chemicals, [Principle Company Name] distributor, wholesale materials"
+          content="Sarawagi Enterprises is a trusted industrial solutions provider specializing in
+          industrial valves, filtration systems, construction chemicals, and protective coatings. We are authorized dealers
+           and distributors of leading global and Indian brands, delivering reliable products and expert technical support."
         />
       </Helmet>
       <Hero />

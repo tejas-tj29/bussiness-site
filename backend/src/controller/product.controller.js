@@ -48,20 +48,19 @@ export const createProduct = async (req, res) => {
 // 📤 2. READ: Fetches all products mapped under a specific company (GET Request)
 export const getProductsByCompany = async (req, res) => {
   try {
-    const { companyName } = req.query; // Extracts key filters from query params string (?companyName=...)
+    let { companyName } = req.params;
+    
+    companyName = companyName.replace(/-/g, " ");
 
-    let queryFilter = {};
-    if (companyName) {
-      queryFilter.companyCategory = companyName;
-    }
-
-    // Dynamic database search using hmara optimized schema indexing wire
-    const productsList = await Product.find(queryFilter).sort({ order: 1, createdAt: 1 });
+    // Database mein regex se search karo taaki case ka koi issue na ho
+    const products = await Product.find({ 
+      companyCategory: { $regex: new RegExp(`^${companyName}$`, 'i') } 
+    }).sort({ order: 1, createdAt: 1 });
 
     res.status(200).json({
       success: true,
-      count: productsList.length,
-      data: productsList,
+      count: products.length,
+      data: products,
     });
   } catch (error) {
     res.status(500).json({

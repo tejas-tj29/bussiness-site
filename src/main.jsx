@@ -8,7 +8,7 @@ import Layout from './Layout.jsx'
 import Home from './pages/Home.jsx'
 import Contact from './pages/Contact.jsx'
 import Clients from './pages/Clients.jsx'
-import Products from './pages/Products.jsx'
+import ProductsByCompanyName from './pages/ProductsByCompanyName.jsx'
 import Profile from './pages/Profile.jsx'
 
 import AdminDashboard from './pages/AdminDashboard.jsx'
@@ -30,7 +30,7 @@ createRoot(document.getElementById('root')).render(
           <Route index element={<Home />} />
           <Route path="contact" element={<Contact />} />
           <Route path="clients" element={<Clients />} />
-          <Route path="products" element={<Products />} />
+          <Route path="products/:companyName" element={<ProductsByCompanyName />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="/admin/login" element={<AdminLogin />} />

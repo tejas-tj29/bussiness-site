@@ -3,9 +3,9 @@ import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 
 export default function Layout() {
-  const whatsappNumber = "919431133184";
+  const whatsappNumber = "917209385285";
   const defaultMessage = encodeURIComponent
-  ("Hello Sarawagi Enterprises, I am checking out your industrial equipment catalog. Please share more details.");
+  ("Hello Team Sarawagi Enterprises, I am checking out your industrial equipment catalog. Please share more details.");
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
       <Navbar />

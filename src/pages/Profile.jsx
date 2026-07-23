@@ -6,10 +6,15 @@ function Profile() {
     <div className="min-h-[80vh] bg-white py-16 px-6 sm:px-12 lg:px-24 relative overflow-hidden">
       {/* 🟢 SEO Optimization for Profile Page */}
       <Helmet>
-        <title>Company Profile | Sarawagi Enterprises</title>
+        <title>About Sarawagi Enterprises| Trusted Industrial Solutions Provider in Eastern India</title>
         <meta
           name="description"
-          content="Learn about Sarawagi Enterprises. We deliver reliable industrial and construction solutions across Eastern India based on trust, quality, and performance."
+          content="Learn about Sarawagi Enterprises, a premier engineering products and industrial solutions provider based in Jamshedpur, 
+          serving Tata Steel and other heavy industries across Jharkhand, Odisha, and West Bengal."
+        />
+        <meta 
+          name="keywords" 
+          content="Industrial supplier in Odisha, Industrial supplier in West Bengal, Industrial solutions in Eastern India, B2B engineering supplier Jamshedpur" 
         />
       </Helmet>
 

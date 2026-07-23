@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router";
+import { useParams, Link } from "react-router";
 import { principleCompanies } from "../data/productsData";
 import { Helmet } from "react-helmet-async";
 
@@ -11,14 +11,18 @@ const getOptimizedUrl = (url) => {
   return url;
 };
 
-const Products = () => {
-  const [searchParams] = useSearchParams();
-  const brandFromUrl = searchParams.get("brand");
+const ProductsByCompanyName = () => {
+  const { companyName } = useParams();
+  const decodedBrand = companyName 
+  ? decodeURIComponent(companyName)
+      .replace(/-/g, ' ')
+      .replace(/\b\w/g, (char) => char.toUpperCase()) // Har word ka pehla letter bada kar dega
+  : "Fouress Engineering";
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [activeCategory, setActiveCategory] = useState("Fouress Engineering");
+  const [activeCategory, setActiveCategory] = useState(decodedBrand);
   const [cache, setCache] = useState({});
 
   const companiesList = principleCompanies;
@@ -32,10 +36,11 @@ const Products = () => {
 
   // 1. Sync URL brand with active category state
   useEffect(() => {
-    if (brandFromUrl) {
-      setActiveCategory(brandFromUrl);
+    if (companyName) {
+      const formatted = decodeURIComponent(companyName).replace(/-/g, " ");
+      setActiveCategory(formatted);
     }
-  }, [brandFromUrl]);
+  }, [companyName]);
 
   const fetchInventoryData = async (company, signal) => {
     if (cache[company]) {
@@ -48,7 +53,7 @@ const Products = () => {
     setError(null);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/products/all?companyName=${encodeURIComponent(company)}`,
+        `${import.meta.env.VITE_API_URL}/products/${encodeURIComponent(company)}`,
         { signal },
       );
       const jsonPayload = await response.json();
@@ -85,26 +90,25 @@ const Products = () => {
       {/* Left Sidebar Brand Navigation */}
       <div className="w-full md:w-1/4 flex flex-col gap-2">
         <h3 className="text-xl font-bold mb-4 text-gray-800">Our Principles</h3>
-        {companiesList.map((company) => (
-          <button
-            key={company}
-            onClick={() => {
-              setActiveCategory(company);
-              window.history.pushState(
-                {},
-                "",
-                `/products?brand=${encodeURIComponent(company)}`,
-              );
-            }}
-            className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all ${
-              activeCategory === company
-                ? "bg-blue-600 text-white shadow-md"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            {company}
-          </button>
-        ))}
+        {companiesList.map((company) => {
+          const slug = company.replace(/\s+/g, "-");
+          const isActive = activeCategory.toLowerCase() === company.toLowerCase();
+
+          return (
+            <Link
+              key={company}
+              to={`/products/${slug}`}
+              onClick={() => setActiveCategory(company)}
+              className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all block ${
+                isActive
+                  ? "bg-blue-600 text-white shadow-md"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              {company}
+            </Link>
+          );
+        })}
       </div>
 
       {/* 🖼️ Right Side Products Display Layout Canvas */}
@@ -144,39 +148,39 @@ const Products = () => {
                 categoryName.trim() !== "" &&
                 categoryName !== "General Products";
 
-                return(
-              <section key={categoryName || "uncategorized"}>
-                {/* Category Heading */}
-                {hasValidCategoryName && (
-                  <h3 className="text-xl font-bold text-gray-800 pl-3 pb-5 capitalize">
-                    {categoryName}
-                  </h3>
-                )}
-
-                <div className="flex flex-wrap gap-6 justify-start items-start">
-                  {items.map(
-                    (item) =>
-                      item.image && (
-                        <div
-                          key={item._id}
-                          className="flex flex-col items-center bg-transparent max-w-65 w-full"
-                        >
-                          {item.image && (
-                            <div className="w-full h-68 p-2 pb-10 flex items-center justify-center overflow-hidden rounded-lg bg-gray-50/50">
-                              <img
-                                src={getOptimizedUrl(item.image)}
-                                alt="Product"
-                                loading="lazy"
-                                className="max-h-full max-w-full object-contain mix-blend-multiply"
-                              />
-                            </div>
-                          )}
-                        </div>
-                      ),
+              return (
+                <section key={categoryName || "uncategorized"}>
+                  {/* Category Heading */}
+                  {hasValidCategoryName && (
+                    <h3 className="text-xl font-bold text-gray-800 pl-3 pb-5 capitalize">
+                      {categoryName}
+                    </h3>
                   )}
-                </div>
-              </section>
-                );
+
+                  <div className="flex flex-wrap gap-6 justify-start items-start">
+                    {items.map(
+                      (item) =>
+                        item.image && (
+                          <div
+                            key={item._id}
+                            className="flex flex-col items-center bg-transparent max-w-65 w-full"
+                          >
+                            {item.image && (
+                              <div className="w-full h-68 p-2 pb-10 flex items-center justify-center overflow-hidden rounded-lg bg-gray-50/50">
+                                <img
+                                  src={getOptimizedUrl(item.image)}
+                                  alt="Product"
+                                  loading="lazy"
+                                  className="max-h-full max-w-full object-contain mix-blend-multiply"
+                                />
+                              </div>
+                            )}
+                          </div>
+                        ),
+                    )}
+                  </div>
+                </section>
+              );
             })
           ))}
       </div>
@@ -184,4 +188,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductsByCompanyName;

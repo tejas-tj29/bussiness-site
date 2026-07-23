@@ -1,13 +1,9 @@
 import React,{useEffect} from 'react';
 import {clientLogos} from "../data/siteData.js";
+import {Helmet} from "react-helmet-async";
 
 export default function Clients() {
   // 🟢 Completely empty data array structure ready for your data entries
-
-  useEffect(() => {
-    document.title = "Clients | Sarawagi Enterprises";
-  }, []);
-
   const clientsData = [
     { id: 1, name: "Tata Steel", img: clientLogos[3] },
     { id: 2, name: "Tata Power", img: clientLogos[0] },
@@ -39,6 +35,22 @@ export default function Clients() {
 
   return (
     <main className="pt-2 bg-slate-50 min-h-screen font-sans">
+    <Helmet>
+        <title>
+          Our Clients - Sarawagi Enterprises 
+        </title>
+        <meta
+          name="description"
+          content="Explore our trusted clientele at Sarawagi Enterprises, a leading industrial solutions provider in Eastern India.
+           We proudly serve Tata Steel and several other major industries across Jharkhand, Odisha, and West Bengal, delivering 
+           quality engineering products and services."
+        />
+        <meta
+          name="keywords"
+          content="Tata Steel supplier, Industrial solutions provider, Distributor across Eastern India"
+        />
+  </Helmet>
+
       <section className="py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
