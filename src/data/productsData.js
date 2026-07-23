@@ -24,30 +24,30 @@ export const companySEOData = {
     title:
       "Amiad Filtration Systems & Water Filters | Sarawagi Enterprises",
     description:
-      "Supplying reliable Amiad automatic self-cleaning water filters and industrial filtration solutions for heavy manufacturing units in Jamshedpur.",
+      "Explore reliable Amiad automatic self-cleaning filters and industrial filtration solutions in Jamshedpur, Jharkhand from Sarawagi Enterprises.",
   },
   "Ebro Armaturen": {
     title:
       "Ebro Armaturen Industrial Valves & Flow Control Solutions | Sarawagi Enterprises",
     description:
-      "Authorized distributor of Ebro Armaturen industrial valves, flow control solutions, and automation systems for steel plants and heavy industries in Eastern India.",
+      "Explore Ebro Armaturen industrial valves and flow control solutions in Jamshedpur, Jharkhand from Sarawagi Enterprises.",
   },
   "J.D. Jones": {
     title:
-      "J.D. Jones Industrial Valves & Flow Control Solutions | Sarawagi Enterprises",
+      "J.D. Jones Industrial Packings | Sarawagi Enterprises",
     description:
-      "Get genuine J.D. Jones industrial valves, flow control solutions, and automation systems for steel plants and heavy industries in Eastern India.",
+      "Explore J.D. Jones industrial packings and sealing solutions in Jamshedpur, Jharkhand from Sarawagi Enterprises.",
   },
   "Fosroc Construction Chemicals": {
     title:
       "Fosroc Construction Chemicals & Waterproofing | Sarawagi Enterprises",
     description:
-      "Get authentic Fosroc construction chemicals, industrial flooring solutions, and concrete repair products in Jharkhand and Jamshedpur.",
+      "Explore authentic Fosroc construction chemicals, industrial flooring solutions, and concrete repair products in Jamshedpur, Jharkhand from Sarawagi Enterprises.",
   },
   "MYK Laticrete": {
     title:
-      "MYK Laticrete Tile Adhesives, Grouts & Waterproofing | Sarawagi Enterprises",
+      "MYK Laticrete Tile Adhesives & Grouts | Sarawagi Enterprises",
     description:
-      "Buy genuine MYK Laticrete tile adhesives, heavy-duty industrial grouts, and advanced waterproofing solutions in Jamshedpur, Jharkhand from Sarawagi Enterprises.",
+      "Explore genuine MYK Laticrete tile adhesives and grouts in Jamshedpur, Jharkhand from Sarawagi Enterprises.",
   },
 };
