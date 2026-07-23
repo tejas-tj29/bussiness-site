@@ -98,3 +98,32 @@ export const deleteProduct = async (req, res) => {
     });
   }
 };
+
+export const updateProductCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { category } = req.body;
+
+    if (!category) {
+      return res.status(400).json({ success: false, message: "Category name is required" });
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      id,
+      { category },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Category updated successfully!",
+      data: updatedProduct,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: `Server Error: ${error.message}` });
+  }
+};

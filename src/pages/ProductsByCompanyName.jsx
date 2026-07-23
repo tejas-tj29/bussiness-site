@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router";
 import { principleCompanies, companySEOData } from "../data/productsData";
 import { Helmet } from "react-helmet-async";
 
-
 const getOptimizedUrl = (url) => {
   if (!url) return "https://placehold.co/600x400?text=No+Image";
   if (url.includes("cloudinary.com")) {
@@ -14,8 +13,10 @@ const getOptimizedUrl = (url) => {
 
 const ProductsByCompanyName = () => {
   const { companyName } = useParams();
-  const decodedBrand = companyName 
-    ? decodeURIComponent(companyName).replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+  const decodedBrand = companyName
+    ? decodeURIComponent(companyName)
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (char) => char.toUpperCase())
     : "Fouress Engineering";
 
   const [products, setProducts] = useState([]);
@@ -28,7 +29,7 @@ const ProductsByCompanyName = () => {
 
   const defaultSEO = {
     title: `${activeCategory} Products & Industrial Supplies | Sarawagi Enterprises`,
-    description: `Explore authorized ${activeCategory} industrial products and engineering solutions supplied by Sarawagi Enterprises in Jamshedpur, Jharkhand.`
+    description: `Explore authorized ${activeCategory} industrial products and engineering solutions supplied by Sarawagi Enterprises in Jamshedpur, Jharkhand.`,
   };
   const currentSEO = companySEOData[activeCategory] || defaultSEO;
 
@@ -94,7 +95,8 @@ const ProductsByCompanyName = () => {
         <h3 className="text-xl font-bold mb-4 text-gray-800">Our Principles</h3>
         {companiesList.map((company) => {
           const slug = company.replace(/\s+/g, "-");
-          const isActive = activeCategory.toLowerCase() === company.toLowerCase();
+          const isActive =
+            activeCategory.toLowerCase() === company.toLowerCase();
 
           return (
             <Link
@@ -144,30 +146,47 @@ const ProductsByCompanyName = () => {
               No products found in database for this brand branch yet.
             </p>
           ) : (
-            Object.entries(groupedProducts).map(([categoryName, items]) => {
-              const hasValidCategoryName =
-                categoryName &&
-                categoryName.trim() !== "" &&
-                categoryName !== "General Products";
+            Object.entries(groupedProducts).map(
+              ([categoryName, items], catIdx) => {
+                const hasValidCategoryName =
+                  categoryName &&
+                  categoryName.trim() !== "" &&
+                  categoryName !== "General Products";
 
-              return (
-                <section key={categoryName || "uncategorized"}>
-                  {/* Category Heading */}
-                  {hasValidCategoryName && (
-                    <h3 className="text-xl font-bold text-gray-800 pl-3 pb-5 capitalize">
-                      {categoryName}
-                    </h3>
-                  )}
+                const categoryNo = catIdx + 1;
 
-                  <div className="flex flex-wrap gap-6 justify-start items-start">
-                    {items.map(
-                      (item) =>
-                        item.image && (
-                          <div
-                            key={item._id}
-                            className="flex flex-col items-center bg-transparent max-w-65 w-full"
-                          >
-                            {item.image && (
+                return (
+                  <section key={categoryName || "uncategorized"}>
+                    {/* Category Heading */}
+                    {hasValidCategoryName && (
+                      <div className="flex items-center gap-3 border-b pb-3 mb-4 pl-3">
+                        <span className="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-sm">
+                          #{categoryNo}
+                        </span>
+                        <h3 className="text-xl font-bold text-gray-800 capitalize">
+                          {categoryName}
+                        </h3>
+                      </div>
+                    )}
+
+                    <div className="flex flex-wrap gap-6 justify-start items-start">
+                      {items
+                        .filter((item) => item.image) // 🟢 Pehle hi un products ko hata do jinki image nahi hai
+                        .map((item, itemIdx) => {
+                          const productNumber = hasValidCategoryName
+                            ? `${categoryNo}.${itemIdx + 1}`
+                            : `${itemIdx + 1}`;
+
+                          return (
+                            <div
+                              key={item._id}
+                              className="relative flex flex-col items-center bg-transparent max-w-65 w-full border border-gray-100 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                            >
+                              {/* Product Badge */}
+                              <div className="absolute top-3 right-3 bg-blue-50 text-blue-700 font-bold text-xs px-2.5 py-1 rounded-full border border-blue-100 shadow-sm z-10">
+                                #{productNumber}
+                              </div>
+
                               <div className="w-full h-68 p-2 pb-10 flex items-center justify-center overflow-hidden rounded-lg bg-gray-50/50">
                                 <img
                                   src={getOptimizedUrl(item.image)}
@@ -176,14 +195,14 @@ const ProductsByCompanyName = () => {
                                   className="max-h-full max-w-full object-contain mix-blend-multiply"
                                 />
                               </div>
-                            )}
-                          </div>
-                        ),
-                    )}
-                  </div>
-                </section>
-              );
-            })
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </section>
+                );
+              },
+            )
           ))}
       </div>
     </div>

@@ -6,9 +6,12 @@ const AdminManageProducts = () => {
   const [loading, setLoading] = useState(false);
   const [activeCategory, setActiveCategory] = useState(principleCompanies[0]);
 
+  const [editingId, setEditingId] = useState(null);
+  const [tempCategory, setTempCategory] = useState("");
+
   // 1. Fetch Products Logic
   const fetchProducts = async (company) => {
-    if(!company) return;
+    if (!company) return;
     setLoading(true);
     try {
       const response = await fetch(
@@ -17,9 +20,7 @@ const AdminManageProducts = () => {
       const json = await response.json();
       if (json.success) {
         setProducts(json.data);
-      }
-      else
-        setProducts([]);
+      } else setProducts([]);
     } catch (err) {
       console.error("Fetch error:", err);
     } finally {
@@ -30,6 +31,37 @@ const AdminManageProducts = () => {
   useEffect(() => {
     fetchProducts(activeCategory);
   }, [activeCategory]);
+
+  const handleSaveCategory = async (productId) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/products/update-category/${productId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ category: tempCategory }),
+        },
+      );
+
+      const json = await response.json();
+      if (json.success) {
+        // Local state update kar do taaki page refresh na karna pade
+        setProducts(
+          products.map((item) =>
+            item._id === productId ? { ...item, category: tempCategory } : item,
+          ),
+        );
+        setEditingId(null);
+        alert("✅ Category updated successfully!");
+      } else {
+        alert("❌ Failed to update: " + json.message);
+      }
+    } catch (err) {
+      console.error("Update error:", err);
+      alert("❌ Network error during update.");
+    }
+  };
 
   const handleDelete = async (productId, productTitle) => {
     const isConfirmed = window.confirm(
@@ -109,8 +141,8 @@ const AdminManageProducts = () => {
                 <th className="py-4 px-6 font-semibold text-gray-700">
                   Sub-Category
                 </th>
-                <th className="py-4 px-6 font-semibold text-gray-700 w-40 text-right">
-                  Action
+                <th className="py-4 px-6 font-semibold text-gray-700 w-48 text-right">
+                  Actions
                 </th>
               </tr>
             </thead>
@@ -133,17 +165,56 @@ const AdminManageProducts = () => {
                     </div>
                   </td>
                   <td className="py-4 px-6">
-                    <span className="text-lg font-medium text-gray-800">
-                      {item.category}
-                    </span>
+                    {editingId === item._id ? (
+                      <input
+                        type="text"
+                        value={tempCategory}
+                        autoFocus
+                        onChange={(e) => setTempCategory(e.target.value)}
+                        className="p-2 border border-blue-500 rounded-lg outline-none text-sm bg-white font-medium text-gray-800 w-full shadow-sm"
+                      />
+                    ) : (
+                      <span className="text-lg font-medium text-gray-800">
+                        {item.category}
+                      </span>
+                    )}
                   </td>
-                  <td className="py-4 px-6 text-right">
-                    <button
-                      onClick={() => handleDelete(item._id, item.category)}
-                      className="px-5 py-2.5 bg-white text-red-600 hover:bg-red-600 hover:text-white border border-red-200 rounded-lg font-semibold transition-all duration-200 shadow-sm hover:shadow active:scale-95"
-                    >
-                      Delete
-                    </button>
+                  {/* Action Buttons (Edit / Save / Cancel / Delete) */}
+                  <td className="py-4 px-6 text-right space-x-2">
+                    {editingId === item._id ? (
+                      <>
+                        <button
+                          onClick={() => handleSaveCategory(item._id)}
+                          className="px-3 py-1.5 bg-green-600 text-white rounded-lg text-xs font-semibold hover:bg-green-700 transition"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={() => setEditingId(null)}
+                          className="px-3 py-1.5 bg-gray-300 text-gray-700 rounded-lg text-xs font-semibold hover:bg-gray-400 transition"
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => {
+                            setEditingId(item._id);
+                            setTempCategory(item.category || "");
+                          }}
+                          className="px-3 py-1.5 bg-blue-50 text-blue-600 border border-blue-200 rounded-lg text-xs font-semibold hover:bg-blue-600 hover:text-white transition"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(item._id, item.category)}
+                          className="px-3 py-1.5 bg-white text-red-600 border border-red-200 rounded-lg text-xs font-semibold hover:bg-red-600 hover:text-white transition"
+                        >
+                          Delete
+                        </button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}
