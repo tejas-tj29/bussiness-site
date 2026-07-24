@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  
+
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -51,9 +51,18 @@ export default function Footer() {
                   </a>
                 </p>
                 <p className="flex items-center gap-2">
+                  <span>✉️</span>
+                  <a
+                    href="mailto:support@sarawagienterprises.com"
+                    className="text-[#f7fafc] hover:underline"
+                  >
+                    support@sarawagienterprises.com
+                  </a>
+                </p>
+                <p className="flex items-center gap-2">
                   <span>📞</span>
                   <a
-                    href="tel:+919431133184"
+                    href="tel:+917209385285"
                     className="text-[#f7fafc] hover:underline"
                   >
                     +91 7209385285
@@ -67,7 +76,18 @@ export default function Footer() {
                     href="https://maps.app.goo.gl/JbzoWRbTjnsb5C2D6"
                     className="text-[#f7fafc] hover:underline font-semibold text-xs uppercase tracking-wide"
                   >
-                    Map Direction
+                    Map Direction - Office
+                  </a>
+                </p>
+                <p className="flex items-center gap-2">
+                  <span>📍</span>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://maps.app.goo.gl/tw92sMYVnsJBBvnz9"
+                    className="text-[#f7fafc] hover:underline font-semibold text-xs uppercase tracking-wide"
+                  >
+                    Map Direction - Warehouse
                   </a>
                 </p>
               </div>
@@ -90,15 +110,39 @@ export default function Footer() {
                     Home
                   </Link>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[10px] text-slate-500">●</span>
-                  <Link
-                    to="/profile"
-                    onClick={handleScrollToTop}
-                    className="text-slate-300 hover:text-white hover:underline transition-colors"
-                  >
+                <li className="flex flex-col gap-2">
+                  {/* Parent Header Item: About Us */}
+                  <div className="flex items-center gap-2 font-semibold text-slate-200">
+                    <span className="text-[10px] text-slate-500">●</span>
                     About Us
-                  </Link>
+                  </div>
+
+                  {/* Nested Sub-List containing Profile and Clients directly below it */}
+                  <ul className="pl-5 flex flex-col gap-2">
+                    {/* Sub-item 1: Profile */}
+                    <li className="flex items-center gap-2">
+                      <span className="text-[10px] text-slate-500">●</span>
+                      <Link
+                        to="/profile"
+                        onClick={handleScrollToTop}
+                        className="text-slate-300 hover:text-white hover:underline transition-colors capitalize"
+                      >
+                        profile
+                      </Link>
+                    </li>
+
+                    {/* Sub-item 2: Clients */}
+                    <li className="flex items-center gap-2">
+                      <span className="text-[10px] text-slate-500">●</span>
+                      <Link
+                        to="/clients"
+                        onClick={handleScrollToTop}
+                        className="text-slate-300 hover:text-white hover:underline transition-colors capitalize"
+                      >
+                        clients
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-[10px] text-slate-500">●</span>
