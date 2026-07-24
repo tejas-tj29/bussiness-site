@@ -54,13 +54,13 @@ export default function Navbar() {
               +91 7209385285
             </a>
             <a
-              href="mailto:sarawgi@hotmail.com?subject=Industrial%20Equipment%20Inquiry"
+              href="mailto:support@sarawagienterprises.com?subject=Industrial%20Equipment%20Inquiry"
               className="flex items-center gap-1 hover:text-blue-400 transition-colors duration-150 group"
             >
               <span className="text-blue-400 font-medium group-hover:underline">
                 ✉️ Email:
               </span>
-              sarawgi@hotmail.com
+              support@sarawagienterprises.com
             </a>
           </div>
           <div className="flex space-x-4">
@@ -262,10 +262,10 @@ export default function Navbar() {
               {/* 📱 NEW: Mobile Contact Drawer Items */}
               <div className="mb-4 pb-4 border-b border-gray-100 space-y-2">
                 <a
-                  href="tel:+919431133184"
+                  href="tel:+91 7209385285"
                   className="flex items-center gap-2 text-blue-600"
                 >
-                  📞 Call: +91 9431133184
+                  📞 Call: +91 7209385285
                 </a>
                 <a
                   href="mailto:support@sarawagienterprises.com"
