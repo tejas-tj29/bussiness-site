@@ -268,10 +268,10 @@ export default function Navbar() {
                   📞 Call: +91 9431133184
                 </a>
                 <a
-                  href="mailto:sarawgi@hotmail.com"
+                  href="mailto:support@sarawagienterprises.com"
                   className="flex items-center gap-2 text-blue-600"
                 >
-                  ✉️ Email: sarawgi@hotmail.com
+                  ✉️ Email: support@sarawagienterprises.com
                 </a>
               </div>
               <Link
