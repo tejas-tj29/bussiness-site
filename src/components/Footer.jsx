@@ -225,25 +225,67 @@ export default function Footer() {
               <hr className="border-slate-700 w-full" />
               <ul className="space-y-2.5 text-sm text-slate-300 font-medium">
                 <li className="hover:text-white transition-colors cursor-pointer">
-                  Fouress Engineering(I) Pvt.Ltd.
+                  <Link
+                    to="/products/Fouress%20Engineering"
+                    onClick={handleScrollToTop}
+                    className="text-slate-300 hover:text-white hover:underline transition-colors"
+                  >
+                    Fouress Engineering(I) Pvt.Ltd.
+                  </Link>
                 </li>
                 <li className="hover:text-white transition-colors cursor-pointer">
-                  Amiad Filteration(I) Pvt.Ltd.
+                  <Link
+                    to="/products/Auma%20India"
+                    onClick={handleScrollToTop}
+                    className="text-slate-300 hover:text-white hover:underline transition-colors"
+                  >
+                    Auma India Pvt.Ltd.
+                  </Link>
                 </li>
                 <li className="hover:text-white transition-colors cursor-pointer">
-                  Auma India Pvt.Ltd.
+                  <Link
+                    to="/products/Amiad%20Filtration"
+                    onClick={handleScrollToTop}
+                    className="text-slate-300 hover:text-white hover:underline transition-colors"
+                  >
+                    Amiad Filtration(I) Pvt.Ltd.
+                  </Link>
                 </li>
                 <li className="hover:text-white transition-colors cursor-pointer">
-                  Fosroc Chemicals India Pvt.Ltd.
+                  <Link
+                    to="/products/Ebro%20Armaturen"
+                    onClick={handleScrollToTop}
+                    className="text-slate-300 hover:text-white hover:underline transition-colors"
+                  >
+                    Ebro Armaturen
+                  </Link>
                 </li>
                 <li className="hover:text-white transition-colors cursor-pointer">
-                  J.D Jones & Co. Pvt.Ltd.
+                  <Link
+                    to="/products/J.D.%20Jones"
+                    onClick={handleScrollToTop}
+                    className="text-slate-300 hover:text-white hover:underline transition-colors"
+                  >
+                    J.D Jones & Co. Pvt.Ltd.
+                  </Link>
                 </li>
                 <li className="hover:text-white transition-colors cursor-pointer">
-                  MYK Laticrete India Pvt.Ltd.
+                  <Link
+                    to="/products/Fosroc%20Construction%20Chemicals"
+                    onClick={handleScrollToTop}
+                    className="text-slate-300 hover:text-white hover:underline transition-colors"
+                  >
+                    Fosroc Construction Chemicals
+                  </Link>
                 </li>
                 <li className="hover:text-white transition-colors cursor-pointer">
-                  Ebro Armaturen
+                  <Link
+                    to="/products/MYK%20Laticrete"
+                    onClick={handleScrollToTop}
+                    className="text-slate-300 hover:text-white hover:underline transition-colors"
+                  >
+                    MYK Laticrete India Pvt.Ltd.
+                  </Link>
                 </li>
               </ul>
             </div>
